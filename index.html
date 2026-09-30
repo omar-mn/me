@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Omar Ali Hassan — DevOps &amp; Platform Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --ink: #1C1C1A;
+      --sub: #5B5B56;
+      --line: #DDDAD3;
+      --faint: #F1F0EC;
+
+      --sidebar-w: 196px;
+      --page-max: 1340px;
+
+      box-sizing: border-box;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #141412;
+        --ink: #EDECE8;
+        --sub: #A6A49B;
+        --line: #2E2D28;
+        --faint: #1C1B18;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #141412;
+      --ink: #EDECE8;
+      --sub: #A6A49B;
+      --line: #2E2D28;
+      --faint: #1C1B18;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      background: var(--bg);
+      z-index: 20;
+    }
+
+    .topbar__name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 17px;
+    }
+
+    .topbar__toggle {
+      font: inherit;
+      font-size: 13px;
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 6px 12px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 12px 20px;
+      font-size: 14px;
+      color: var(--sub);
+      text-decoration: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .shell {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .sidebar {
+      flex: 0 0 var(--sidebar-w);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 64px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+    }
+
+    .sidebar__id {
+      margin-bottom: 40px;
+    }
+
+    .sidebar__name {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-size: 19px;
+    }
+
+    .sidebar__role {
+      display: block;
+      font-size: 13px;
+      color: var(--sub);
+      margin-top: 4px;
+    }
+
+    .sidebar__nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar__nav a {
+      display: block;
+      padding: 7px 0;
+      font-size: 14px;
+      color: var(--sub);
+      text-decoration: none;
+    }
+
+    .sidebar__nav a:hover {
+      color: var(--ink);
+    }
+
+    .sidebar__nav a.is-active {
+      color: var(--ink);
+    }
+
+    .sidebar__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--sub);
+    }
+
+    .sidebar__links a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .sidebar__links a:hover {
+      color: var(--ink);
+      border-color: var(--sub);
+    }
+
+    .main {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 64px 40px 80px;
+    }
+
+    .inner {
+      max-width: 1060px;
+    }
+
+    section {
+      padding: 52px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    section h2 {
+      font-size: 13px;
+      letter-spacing: .04em;
+      color: var(--sub);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    #hero {
+      padding-top: 0;
+    }
+
+    header.hero {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .photo-ph {
+      flex: 0 0 auto;
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--faint);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-ph img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(27px, 4vw, 38px);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-text p.role {
+      color: var(--sub);
+      font-size: 15.5px;
+      margin-top: 5px;
+    }
+
+    blockquote.statement {
+      margin: 26px 0 0;
+      padding-left: 16px;
+      border-left: 2px solid var(--line);
+      font-family: 'Source Serif 4', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink);
+      max-width: 58ch;
+    }
+
+    .about p {
+      max-width: 64ch;
+      font-size: 16px;
+    }
+
+    .about .facts {
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--sub);
+    }
+
+    .project {
+      margin-bottom: 60px;
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-head {
+      margin-bottom: 16px;
+    }
+
+    .project-head h3 {
+      font-size: 21px;
+    }
+
+    .project-head .role {
+      font-size: 13.5px;
+      color: var(--sub);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .project-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 480px;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .project-top .prose p {
+      font-size: 15.5px;
+      max-width: 60ch;
+      margin: 0 0 14px;
+    }
+
+    .project-top .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .gallery {
+      position: sticky;
+      top: 24px;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 80% 20%;
+      gap: 3px;
+      background: var(--line);
+    }
+
+    .g-main {
+      grid-row: 1;
+      background: var(--faint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sub);
+      font-size: 16px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .g-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .g-thumbs {
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+
+    .g-thumb {
+      background: var(--faint);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--sub);
+      cursor: pointer;
+      overflow: hidden;
+      text-align: center;
+      padding: 4px;
+    }
+
+    .g-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .project ul.highlights {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .project ul.highlights li {
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    .stack {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .status-note {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--sub);
+      border: 1px solid var(--line);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    .proj-links {
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+
+    .proj-links a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+    }
+
+    .proj-links a:hover {
+      border-color: var(--ink);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tags span {
+      font-size: 13px;
+      color: var(--sub);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .entry-head h3 {
+      font-size: 18px;
+    }
+
+    .entry-head .meta {
+      font-size: 13px;
+      color: var(--sub);
+      white-space: nowrap;
+    }
+
+    .entry .org {
+      font-size: 14px;
+      color: var(--sub);
+      margin-top: 2px;
+    }
+
+    .entry ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .entry li {
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    footer {
+      padding: 40px 0 64px;
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 24px;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lb-frame {
+      position: relative;
+      width: min(92vw, 1800px);
+      height: 86vh;
+      background: #232320;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #B9B8B2;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .lb-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 52px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+      opacity: .75;
+      z-index: 2;
+    }
+
+    .lb-nav:hover {
+      opacity: 1;
+    }
+
+    .lb-prev {
+      left: 8px;
+    }
+
+    .lb-next {
+      right: 8px;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: -38px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: .75;
+      z-index: 2;
+    }
+
+    .lb-close:hover {
+      opacity: 1;
+    }
+
+    .lb-count {
+      position: absolute;
+      bottom: -28px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #8A8983;
+      font-size: 12px;
+    }
+
+    @media (max-width: 1100px) {
+      .project-top {
+        grid-template-columns: minmax(0, 1fr) 400px;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .topbar {
+        display: flex;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 40px 24px 64px;
+      }
+
+      header.hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .project-top {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        position: static;
+        max-width: 560px;
+      }
+
+      .lb-nav {
+        position: static;
+        color: #fff;
+        font-size: 22px;
+      }
+
+      .lb-frame {
+        width: 100%;
+      }
+
+      .lb-prev,
+      .lb-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+      }
+
+      .lb-prev {
+        left: 8px;
+      }
+
+      .lb-next {
+        right: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <span class="topbar__name">Omar Ali Hassan</span>
+    <button class="topbar__toggle" id="navToggle" aria-expanded="false">Menu</button>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav"></nav>
+
+  <div class="shell">
+
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="sidebar__id">
+          <span class="sidebar__name">Omar Ali Hassan</span>
+          <span class="sidebar__role">Junior DevOps &amp; Platform Engineer</span>
+        </div>
+
+        <nav class="sidebar__nav">
+          <ul id="sidebarNavList">
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <div class="sidebar__links">
+        <a href="https://github.com/omar-mn" target="_blank" rel="noopener">
+          github.com/omar-mn
+        </a>
+
+        <a href="https://linkedin.com/in/omar-ali-674422332" target="_blank" rel="noopener">
+          linkedin
+        </a>
+
+        <a href="mailto:omar.ali.hassan02@gmail.com">
+          omar.ali.hassan02@gmail.com
+        </a>
+      </div>
+
+    </aside>
+
+    <main class="main">
+
+      <div class="inner">
+
+        <section id="hero">
+
+          <header class="hero">
+
+            <div class="photo-ph">
+              <img src="./assets/mates/om.jpeg" alt="Omar Ali Hassan">
+            </div>
+
+            <div class="hero-text">
+              <h1>Omar Ali Hassan</h1>
+              <p class="role">Junior DevOps &amp; Platform Engineer</p>
+            </div>
+
+          </header>
+
+          <blockquote class="statement">
+            End-to-end systems, from application architecture to infrastructure and deployment.
+          </blockquote>
+
+        </section>
+
+        <section id="about" class="about">
+
+          <h2>About</h2>
+
+          <p>
+            Junior DevOps / Platform Engineer with hands-on experience building containerized, self-hosted infrastructure across application delivery, networking, observability, and high-availability services. Experience includes HA PostgreSQL, reverse proxies and traffic management, CI/CD pipelines, centralized observability, and Kubernetes-based deployment. Currently building a private RKE2 Kubernetes platform with Cilium networking, GitOps delivery through Argo CD, and progressive delivery through Argo Rollouts.
+          </p>
+
+          <div class="facts">
+            B.Sc. Computers and Information Systems, Sohag University — expected 2028
+          </div>
+
+        </section>
+
+        <section id="skills">
+
+          <h2>Skills</h2>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>Bash</span>
+            <span>JavaScript</span>
+            <span>C++</span>
+
+            <span>Django</span>
+            <span>DRF</span>
+            <span>Django Channels</span>
+            <span>Celery</span>
+
+            <span>Linux</span>
+            <span>Docker</span>
+            <span>Kubernetes</span>
+            <span>RKE2</span>
+
+            <span>GitHub Actions</span>
+            <span>Nginx</span>
+            <span>Traefik</span>
+            <span>Argo CD</span>
+
+            <span>Argo Rollouts</span>
+            <span>Cilium</span>
+            <span>Prometheus</span>
+            <span>Grafana</span>
+
+            <span>Loki</span>
+            <span>PostgreSQL</span>
+            <span>Redis</span>
+            <span>Patroni</span>
+
+            <span>etcd</span>
+            <span>HAProxy</span>
+            <span>Longhorn</span>
+            <span>GitOps</span>
+
+            <span>High Availability</span>
+          </div>
+
+        </section>
+
+        <section id="experience">
+
+          <h2>Experience</h2>
+
+          <div class="entry">
+
+            <div class="entry-head">
+              <h3>DevOps / Infrastructure Intern — Mosalam</h3>
+              <span class="meta">June 2026 – Present</span>
+            </div>
+
+            <ul>
+              <li>
+                Designed and operated self-hosted infrastructure on dedicated servers, including service isolation, internal networking, and traffic flow across multiple network paths.
+              </li>
+
+              <li>
+                Containerized and integrated infrastructure services with Docker, including reverse proxies, traffic management, caching, and observability components.
+              </li>
+
+              <li>
+                Built the private RKE2 Kubernetes platform across a multi-network environment, working through its cluster, CNI, service exposure, and persistent storage layers.
+              </li>
+
+              <li>
+                Implemented GitOps delivery with Argo CD and developed the platform toward progressive delivery with Argo Rollouts and failure testing.
+              </li>
+            </ul>
+
+          </div>
+
+        </section>
+
+        <section id="projects">
+
+          <h2>Projects</h2>
+
+          <div class="project">
+
+            <div class="project-head">
+              <h3>Mates</h3>
+              <span class="role">Real-time chat app &amp; infrastructure</span>
+            </div>
+
+            <div class="project-top">
+
+              <div class="prose">
+
+                <p>
+                  Mates is a real-time chat application built with Django and React and structured as a multi-service system rather than a single application container. The system separates Users, Chat, and Frontend responsibilities and combines application services with caching, asynchronous workers, reverse proxies, observability, and a high-availability data layer.
+                </p>
+
+                <p>
+                  The backend exposes REST APIs and persistent WebSocket communication for authentication, rooms, memberships, and messaging, with 28 documented REST/WebSocket endpoints. Django Channels handles real-time communication, Redis supports the asynchronous and caching layer, and Celery workers handle background processing.
+                </p>
+
+                <p>
+                  The infrastructure side was designed around failure boundaries and operational visibility: PostgreSQL is deployed with Patroni, etcd, and HAProxy to model database failover; Traefik handles HTTP and WebSocket traffic while Nginx serves frontend assets; Prometheus, Grafana, and Loki provide metrics, dashboards, and centralized logs. GitHub Actions validates the application, builds container images, and publishes versioned artifacts before deployment to Kubernetes through custom manifests.
+                </p>
+
+              </div>
+
+              <div class="gallery" data-project="mates">
+
+                <div class="g-main" data-idx="0">
+                  <img src="assets/mates/mates-arch.png" alt="Mates cover image">
+                </div>
+
+                <div class="g-thumbs">
+
+                  <div class="g-thumb" data-idx="1">
+                    <img src="assets/mates/github-actions.png" alt="Mates architecture">
+                  </div>
+
+                  <div class="g-thumb" data-idx="2">
+                    <img src="assets/mates/node-dashboard.png" alt="Mates Grafana dashboard">
+                  </div>
+
+                  <div class="g-thumb" data-idx="3">
+                    <img src="assets/mates/cadvisor-dashboard-1.png" alt="Mates chat UI">
+                  </div>
+
+                  <div class="g-thumb" data-idx="4">
+                    <img src="assets/mates/rooms.png" alt="Mates Kubernetes deployment">
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <ul class="highlights">
+              <li>Highly-available PostgreSQL using Patroni, etcd, and HAProxy, with Redis for caching and asynchronous processing</li>
+              <li>Traefik for HTTP/WebSocket traffic and Nginx for frontend static assets</li>
+              <li>Prometheus, Grafana, Loki, cAdvisor, node-exporter, nginx-exporter, and Django metrics for observability</li>
+              <li>GitHub Actions for testing, image builds, and versioned publishing</li>
+              <li>Two Celery workers for background processing</li>
+              <li>Deployed to Kubernetes through custom Minikube manifests</li>
+            </ul>
+
+            <div class="stack">
+              Python · Django · DRF · Django Channels · React · PostgreSQL · Redis · Celery · Traefik · Nginx · Docker · Kubernetes · GitHub Actions · Prometheus · Grafana · Loki · Patroni · etcd · HAProxy
+            </div>
+
+            <div class="proj-links">
+              <a href="https://github.com/omar-mn/Mates" target="_blank" rel="noopener">
+                github.com/omar-mn/Mates
+              </a>
+            </div>
+
+          </div>
+
+          <div class="project">
+
+            <div class="project-head">
+              <h3>Private RKE2 Kubernetes Platform</h3>
+              <span class="role">Self-hosted, production-style platform</span>
+            </div>
+
+            <div class="project-top">
+
+              <div class="prose">
+
+                <p>
+                  Built during the Mosalam DevOps internship as a private Kubernetes platform rather than a single application deployment. The cluster runs RKE2 across a multi-network lab environment with a 3-node highly-available control plane backed by etcd. Control-plane, pod, and NAT traffic are separated across dedicated network interfaces and address ranges.
+                </p>
+
+                <p>
+                  Cilium provides the cluster networking layer with eBPF, native routing, and kube-proxy replacement. Application traffic is exposed through Gateway API and Traefik. Because the environment has no cloud load balancer, kube-vip provides the Kubernetes API VIP, while Cilium LoadBalancer IPAM and L2 announcements provide LoadBalancer-style service exposure inside the private network.
+                </p>
+
+                <p>
+                  Longhorn provides dynamically provisioned persistent storage, and Argo CD is deployed and actively synchronizing application state from Git. The platform is being extended with Argo Rollouts for progressive delivery, failure testing, and platform documentation.
+                </p>
+
+              </div>
+
+              <div class="gallery" data-project="rke2">
+
+                <div class="g-main" data-idx="0">
+                  <img src="assets/rke2/rke2.png" alt="RKE2 platform cover">
+                </div>
+
+                <div class="g-thumbs">
+
+                  <div class="g-thumb" data-idx="1">
+                    <img src="assets/rke2/argocd.jpeg" alt="RKE2 network layout">
+                  </div>
+
+                  <div class="g-thumb" data-idx="2">
+                    <img src="assets/rke2/pods.jpeg" alt="Cilium L2 flow">
+                  </div>
+
+                  <div class="g-thumb" data-idx="3">
+                    <img src="assets/rke2/k8s.png" alt="Argo CD synchronization">
+                  </div>
+
+                  <div class="g-thumb" data-idx="4">
+                    <img src="assets/rke2/cni.png" alt="RKE2 cluster nodes">
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <ul class="highlights">
+              <li>3-node HA control plane with embedded etcd and kube-vip for the Kubernetes API VIP</li>
+              <li>Cilium networking with eBPF, native routing, and kube-proxy replacement</li>
+              <li>Cilium LoadBalancer IPAM and L2 announcements for private LoadBalancer exposure</li>
+              <li>Gateway API and Traefik for application traffic</li>
+              <li>Longhorn for dynamically provisioned persistent storage</li>
+              <li>Argo CD for Git-based application synchronization</li>
+            </ul>
+
+            <span class="status-note">
+              Implemented: HA control plane, Cilium networking, private LoadBalancer exposure, Traefik / Gateway API, Longhorn, and Argo CD. In progress: Argo Rollouts, progressive delivery testing, failure testing, and platform documentation.
+            </span>
+
+            <div class="stack">
+              RKE2 · Kubernetes · Cilium · eBPF · kube-vip · Traefik · Gateway API · Longhorn · Argo CD · GitOps
+            </div>
+
+          </div>
+
+        </section>
+
+        <section id="contact">
+
+          <h2>Contact</h2>
+
+          <p>
+            Open to junior DevOps, Platform Engineering, and infrastructure work.
+          </p>
+
+          <div class="proj-links">
+
+            <a href="mailto:omar.ali.hassan02@gmail.com">
+              omar.ali.hassan02@gmail.com
+            </a>
+            ·
+
+            <a href="https://github.com/omar-mn" target="_blank" rel="noopener">
+              GitHub
+            </a>
+            ·
+
+            <a href="https://linkedin.com/in/omar-ali-674422332" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+
+          </div>
+
+        </section>
+
+        <footer>
+          Omar Ali Hassan · omar.ali.hassan02@gmail.com
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <div class="lightbox" id="lightbox">
+
+    <div class="lb-frame" id="lbFrame">
+
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+        ‹
+      </button>
+
+      <span id="lbLabel"></span>
+
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+        ›
+      </button>
+
+      <button class="lb-close" id="lbClose" aria-label="Close">
+        ×
+      </button>
+
+      <span class="lb-count" id="lbCount"></span>
+
+    </div>
+
+  </div>
+
+  <script>
+    var galleries = {
+
+      mates: [
+        {
+          src: "assets/mates/mates-arch.png"
+        },
+        {
+          src: "assets/mates/github-actions.png"
+        },
+        {
+          src: "assets/mates/node-dashboard.png"
+        },
+        {
+          src: "assets/mates/cadvisor-dashboard-1.png"
+        },
+        {
+          src: "assets/mates/rooms.png"
+        }
+      ],
+
+      rke2: [
+        {
+          src: "assets/rke2/rke2.png"
+        },
+        {
+          src: "assets/rke2/argocd.jpeg"
+        },
+        {
+          src: "assets/rke2/pods.jpeg"
+        },
+        {
+          src: "assets/rke2/k8s.png"
+        },
+        {
+          src: "assets/rke2/cni.png"
+        }
+      ]
+
+    };
+
+    var current = null;
+    var idx = 0;
+
+    var lightbox = document.getElementById('lightbox');
+    var lbFrame = document.getElementById('lbFrame');
+    var lbLabel = document.getElementById('lbLabel');
+    var lbCount = document.getElementById('lbCount');
+
+    function render() {
+
+      var item = galleries[current][idx];
+
+      lbFrame.querySelectorAll('.lb-image').forEach(function(img) {
+        img.remove();
+      });
+
+      var img = document.createElement('img');
+
+      img.className = 'lb-image';
+      img.src = item.src;
+      img.alt = item.title || '';
+
+      lbFrame.insertBefore(img, lbFrame.firstChild);
+
+      lbLabel.textContent = item.title || '';
+      lbCount.textContent = (idx + 1) + ' / ' + galleries[current].length;
+    }
+
+    function open(project, i) {
+      current = project;
+      idx = i;
+
+      render();
+
+      lightbox.classList.add('open');
+    }
+
+    function close() {
+      lightbox.classList.remove('open');
+      current = null;
+    }
+
+    function nav(delta) {
+
+      var list = galleries[current];
+
+      idx = (idx + delta + list.length) % list.length;
+
+      render();
+    }
+
+    document.querySelectorAll('.gallery').forEach(function(g) {
+
+      var project = g.getAttribute('data-project');
+
+      g.querySelectorAll('[data-idx]').forEach(function(el) {
+
+        el.addEventListener('click', function() {
+
+          open(
+            project,
+            parseInt(el.getAttribute('data-idx'), 10)
+          );
+
+        });
+
+      });
+
+    });
+
+    document.getElementById('lbPrev').addEventListener('click', function() {
+      nav(-1);
+    });
+
+    document.getElementById('lbNext').addEventListener('click', function() {
+      nav(1);
+    });
+
+    document.getElementById('lbClose').addEventListener('click', close);
+
+    lightbox.addEventListener('click', function(e) {
+
+      if (e.target === lightbox) {
+        close();
+      }
+
+    });
+
+    document.addEventListener('keydown', function(e) {
+
+      if (!lightbox.classList.contains('open')) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        close();
+      }
+
+      if (e.key === 'ArrowLeft') {
+        nav(-1);
+      }
+
+      if (e.key === 'ArrowRight') {
+        nav(1);
+      }
+
+    });
+
+    var toggle = document.getElementById('navToggle');
+    var mobileNav = document.getElementById('mobileNav');
+
+    document.querySelectorAll('#sidebarNavList a').forEach(function(link) {
+
+      var a = document.createElement('a');
+
+      a.href = link.getAttribute('href');
+      a.textContent = link.textContent;
+
+      a.addEventListener('click', function() {
+
+        mobileNav.classList.remove('is-open');
+
+        toggle.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+
+      });
+
+      mobileNav.appendChild(a);
+
+    });
+
+    toggle.addEventListener('click', function() {
+
+      var open2 = mobileNav.classList.toggle('is-open');
+
+      toggle.setAttribute(
+        'aria-expanded',
+        String(open2)
+      );
+
+    });
+
+    var navLinks = document.querySelectorAll('#sidebarNavList a');
+
+    var sections = Array.prototype.map.call(
+      navLinks,
+      function(l) {
+        return document.querySelector(
+          l.getAttribute('href')
+        );
+      }
+    );
+
+    if ('IntersectionObserver' in window) {
+
+      var observer = new IntersectionObserver(
+        function(entries) {
+
+          entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+
+              var id = entry.target.getAttribute('id');
+
+              navLinks.forEach(function(l) {
+
+                l.classList.toggle(
+                  'is-active',
+                  l.getAttribute('href') === '#' + id
+                );
+
+              });
+
+            }
+
+          });
+
+        },
+        {
+          rootMargin: '-40% 0px -55% 0px',
+          threshold: 0
+        }
+      );
+
+      sections.forEach(function(s) {
+
+        if (s) {
+          observer.observe(s);
+        }
+
+      });
+
+    }
+  </script>
+
+</body>
+
+</html>
